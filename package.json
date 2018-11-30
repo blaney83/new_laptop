@@ -1,0 +1,20 @@
+{
+  "name": "y",
+  "version": "y",
+  "description": "y",
+  "main": "y",
+  "repository": "y",
+  "author": "y",
+  "license": "y",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "casperjs": "^1.1.4",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^5.3.14",
+    "morgan": "^1.9.1",
+    "phantomjs": "^2.1.7"
+  }
+}
