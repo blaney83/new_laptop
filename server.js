@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 // Require all models
 const db = require("./models");
 
-const PORT = 3000;
+const PORT = 3004;
 
 // Initialize Express
 const app = express();
@@ -29,6 +29,7 @@ mongoose.connect(MONGODB_URI)
 
 require("./routes/zip-routes.js")(app);
 require("./routes/product-routes.js")(app);
+require("./routes/saved-routes.js")(app);
 
 // Set Handlebars.
 let exphbs = require("express-handlebars");

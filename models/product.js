@@ -18,15 +18,15 @@ let productSchema = new Schema({
         required: false
     },
     msrp: {
-        type: String,
+        type: Number,
         required: false
     },
     currentPrice: {
-        type: String,
+        type: Number,
         required: false
     },
     openBoxPrice: {
-        type: String,
+        type: Number,
         required: false
     },
     savingsPercent: {
@@ -34,6 +34,10 @@ let productSchema = new Schema({
         required: false
     },
     savingsAmount: {
+        type: Number,
+        required: false
+    },
+    lowestPrice: {
         type: Number,
         required: false
     },

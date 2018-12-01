@@ -7,8 +7,4 @@ module.exports = function(app){
         console.log("its firing")
         return res.render("zipCode")
     });
-
-
-
-
 }

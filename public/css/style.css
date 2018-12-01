@@ -1,0 +1,65 @@
+
+body{
+    position: relative;
+    height: 100%;
+}
+
+footer{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 3;
+}
+
+.buttCont{
+    margin: 2rem 0 1rem 0;
+    width: 100%
+}
+
+.ratingSpan {
+    font-weight: bold;
+    color: rgb(0, 81, 255);
+}
+
+.title{
+    font-size: 1.3rem;
+    font-weight: bolder;
+}
+
+.moneyValues{
+    font-size: 1.3rem;
+    font-weight: bolder;
+}
+
+.thumbRow{
+    position: relative;
+}
+
+.imageElem{
+    /* position: absolute;
+    left: 0px; */
+    width: 100%
+}
+
+.itemCont{
+    width: 85%;
+}
+
+.collection .collection-item.avatar{
+    padding-left: 0px;
+}
+
+#MSRP{
+    color: rgb(241, 79, 79);
+    font-size: 1.2rem
+}
+
+#currentPrice{
+    color: rgb(150, 135, 0);
+    font-size: 1.5rem;
+}
+
+#openBoxPrice{
+    color: rgb(71, 160, 71);
+    font-size: 2rem;
+}

@@ -1,9 +1,47 @@
-<button id="showProducts">Show</button>
-<button>Sort</button>
-<button>Saved</button>
-
+<div class="container buttCont">
+    <div class="row cardRow">
+        <div class="col s2"></div>
+        <div class="col s8">
+            <div class="card-panel orange center-align">
+                <span class="white-text">
+                    <h3>Welcome to Tech Top-Off!</h3><br>
+                    <h6>Please choose one of the options below to get started.</h6>
+                </span>
+            </div>
+        </div>
+        <div class="col s2"></div>
+    </div>
+    <div class="row center-align">
+        <div class="col s12">
+            <a class="dropdown-trigger waves-effect waves-light btn" href="#!" data-target="dropdown1">Find
+                Deals<i class="material-icons right">search</i></a>
+            <a class="dropdown-trigger waves-effect waves-light btn" href="#!" data-target="dropdown2">Sort By<i class="material-icons right">arrow_downward</i></a>
+            <a class="waves-effect waves-light btn" id="showProducts"><i class="material-icons left">grade</i>Saved
+                Deals</a>
+        </div>
+    </div>
+    <ul id="dropdown1" class="dropdown-content">
+        <li id="showProducts"><a href="#!">Laptops</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Monitors</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Headphones</a></li>
+    </ul>
+    <ul id="dropdown2" class="dropdown-content">
+        <li><a href="#!" id="bestDealsSort">Best Deals</a></li>
+        <li class="divider"></li>
+        <li id="lowPriceSort"><a href="#!">Lowest Price</a></li>
+        <li class="divider"></li>
+        <li id="highestPriceSort"><a href="#!">Highest Price</a></li>
+    </ul>
+</div>
 <div class="row">
-    {{#each products}}
-    {{> item}}
-    {{/each}}
+    <div class="col s12">
+        <ul class="collection">
+            {{#each products}}
+            {{> item}}
+            {{/each}}
+        </ul>
+    </div>
+</div>
 </div>

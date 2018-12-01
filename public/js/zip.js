@@ -14,10 +14,11 @@ $(document).ready(function () {
         };
         let zipCode = fullZip.join("")
         console.log(zipCode)
-        $.get("/zip", {
+        $.get("/student", {
             zipCode : zipCode,
             coords : coordinates
         }).then(function (resp) {
+            window.location.replace("/student");
             console.log(resp)
             $("body").html(resp)
         }).catch(function (err) {
