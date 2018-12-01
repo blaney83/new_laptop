@@ -5,22 +5,31 @@ module.exports = function (app) {
 
 
     app.post("/student/saved", function(req, res){
-        console.log(req.query)
-        // db.collectionName.update({"sku":"value"},{$set: {"saved":true}}).then(function(retVal){
-
-        // })
-
+        let searcher = req.body.sku + " "
+        db.Product.update({"sku":searcher},{$set: {"saved":true}}).then(function(retVal){
+            res.send("Saved 1 Item")
+        })
     })
 
-    // app.post("/student/saved", function(req, res){
-    //     db.collectionName.update({"key":"value"},{$set: {"newKey":"newValue"}})
-    //     db.Product.find({}).sort({savingsPercent:-1}).then(function (prodArr){
-    //         console.log(prodArr)
-    //         let myProds = {
-    //             products: prodArr
-    //         }
-    //         res.render("products", myProds)
-    //     })
-    // })
+    app.get("/student/saved", function(req, res){
+        db.Product.find({"saved":true}).then(function (prodArr){
+            console.log(prodArr)
+            let myProds = {
+                products: prodArr
+            }
+            res.render("products", myProds)
+        })
+    })
+
+    app.delete("/student/saved", function(req, res){
+        console.log(req)
+        let searcher = req.body.ids.split(",")
+        searcher.forEach(function(str){
+            corrStr = str + " "
+            db.Product.update({"sku":corrStr},{$set: {"saved":false}}).then(resp=>console.log(resp))
+        })
+        res.send("Saves cleared")
+
+    })
 
 }

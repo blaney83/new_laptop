@@ -63,3 +63,15 @@ footer{
     color: rgb(71, 160, 71);
     font-size: 2rem;
 }
+
+.footRow{
+    margin-bottom: 10px;
+}
+
+.footer-copyright{
+    padding-bottom: 0px !important;
+}
+
+#show20More{
+    width: 50%
+}
