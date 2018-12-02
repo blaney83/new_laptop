@@ -21,11 +21,12 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/gooddealsdb";
-console.log("This is MONGODB_URI vvvvvv")
-console.log(MONGODB_URI)
-console.log("This is process.env.MONGODB_URI vvvvvv")
-console.log(process.env.MONGODB_URI)
+// const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/gooddealsdb";
+const MONGODB_URI = 'mongodb://heroku_rzd3n1px:189tai14n2j834ieb78kcohprh@ds011912.mlab.com:11912/heroku_rzd3n1px'
+// console.log("This is MONGODB_URI vvvvvv")
+// console.log(MONGODB_URI)
+// console.log("This is process.env.MONGODB_URI vvvvvv")
+// console.log(process.env.MONGODB_URI)
 mongoose.connect(MONGODB_URI)
 
 require("./routes/zip-routes.js")(app);
