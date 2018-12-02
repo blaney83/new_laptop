@@ -71,13 +71,13 @@ module.exports = function (app) {
                                     console.log("wrote to db")
                                     hbsobj.products.push(result)
                                 }).catch(function (err) {
-                                    res.send(err)
+                                    console.log(err)
                                 })
                             }
                         }
                     })
                 }).catch(function (err) {
-                    res.send(err)
+                    console.log(err)
                 })
             }
             res.render("products")

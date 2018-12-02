@@ -13,6 +13,6 @@ const CommentSchema = new Schema({
     }
 })
 
-let Comment = mongoose.model("comment", CommentSchema);
+let Comment = mongoose.model("Comment", CommentSchema);
 
 module.exports = Comment;
