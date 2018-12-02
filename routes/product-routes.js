@@ -14,7 +14,11 @@ module.exports = function (app) {
             }
             for (let i = 1; i < 40; i++) {
                 console.log("loop working " + i)
-                axios.interceptors.request.use(function(config){
+                // axios.interceptors.request.use(function (config) {
+                //     console.log(config)
+                //     return config;
+                // })
+                axios.interceptors.response.use(function (config) {
                     console.log(config)
                     return config;
                 })
@@ -23,6 +27,7 @@ module.exports = function (app) {
                     url: "https://www.bestbuy.com/site/laptop-computers/all-laptops/pcmcat138500050001.c?cp=" + i + "&id=pcmcat138500050001",
                 }).then(function (resp) {
                     // console.log(resp)
+                    console.log("response received")
                     let $ = cheerio.load(resp.data)
                     let result = {}
                     $("li.sku-item").each(function (i, element) {
@@ -41,12 +46,12 @@ module.exports = function (app) {
                             result.model = DOL("div.sku-model > div:nth-child(1) > span.sku-value").text()
                             result.sku = DOL("div.sku-model > div:nth-child(2) > span.sku-value").text()
                             result.image = DOL(".product-image").attr("src")
-                            if (LAR(".pricing-price__regular-price").text() === null || LAR(".pricing-price__regular-price").text() === "" || LAR(".pricing-price__regular-price").text() === undefined){
+                            if (LAR(".pricing-price__regular-price").text() === null || LAR(".pricing-price__regular-price").text() === "" || LAR(".pricing-price__regular-price").text() === undefined) {
                                 msrpString = LAR("div.priceView-purchase-price > span").text()
                                 result.msrp = parsePrice(msrpString)
                                 currP = ""
                                 result.currentPrice = null
-                            }else{
+                            } else {
                                 msrpString = LAR(".pricing-price__regular-price").text()
                                 result.msrp = parsePrice(msrpString)
                                 currP = LAR("div.priceView-purchase-price > span").text()
@@ -84,18 +89,20 @@ module.exports = function (app) {
                             }
                         }
                     })
+                // }).then(function(resp){
+                //     res.render("products")
                 }).catch(function (err) {
                     console.log(err)
                 })
             }
-            res.render("products")
+            // res.render("products")
         })
     });
 
     app.get("/student/products/:id", function (req, res) {
-        if(!parseInt(req.params.id)){
+        if (!parseInt(req.params.id)) {
             prodNum = 20
-        }else{
+        } else {
             prodNum = parseInt(req.params.id)
         }
         db.Product.find({}).limit(prodNum).then(function (prodArr) {
@@ -108,16 +115,16 @@ module.exports = function (app) {
     })
 
     app.get("/student", function (req, res) {
-            res.render("products")
+        res.render("products")
     })
 
-    app.get("/student/products/lowest/:id", function(req, res){
-        if(!parseInt(req.params.id)){
+    app.get("/student/products/lowest/:id", function (req, res) {
+        if (!parseInt(req.params.id)) {
             prodNum1 = 20
-        }else{
+        } else {
             prodNum1 = parseInt(req.param.id)
         }
-        db.Product.find({}).sort({lowestPrice:1}).limit(prodNum1).then(function (prodArr){
+        db.Product.find({}).sort({ lowestPrice: 1 }).limit(prodNum1).then(function (prodArr) {
             let myProds = {
                 products: prodArr
             }
@@ -125,13 +132,13 @@ module.exports = function (app) {
         })
     })
 
-    app.get("/student/products/highest/:id", function(req, res){
-        if(!parseInt(req.params.id)){
+    app.get("/student/products/highest/:id", function (req, res) {
+        if (!parseInt(req.params.id)) {
             prodNum2 = 20
-        }else{
+        } else {
             prodNum2 = parseInt(req.params.id)
         }
-        db.Product.find({}).sort({lowestPrice:-1}).limit(prodNum2).then(function (prodArr){
+        db.Product.find({}).sort({ lowestPrice: -1 }).limit(prodNum2).then(function (prodArr) {
             let myProds = {
                 products: prodArr
             }
@@ -139,13 +146,13 @@ module.exports = function (app) {
         })
     })
 
-    app.get("/student/products/best_deals/:id", function(req, res){
-        if(!parseInt(req.params.id)){
+    app.get("/student/products/best_deals/:id", function (req, res) {
+        if (!parseInt(req.params.id)) {
             prodNum3 = 20
-        }else{
+        } else {
             prodNum3 = parseInt(req.params.id)
         }
-        db.Product.find({}).sort({savingsPercent:-1}).limit(prodNum3).then(function (prodArr){
+        db.Product.find({}).sort({ savingsPercent: -1 }).limit(prodNum3).then(function (prodArr) {
             let myProds = {
                 products: prodArr
             }
@@ -153,12 +160,12 @@ module.exports = function (app) {
         })
     })
 
-    function parsePrice(strng){
-        if(strng.length > 3){
+    function parsePrice(strng) {
+        if (strng.length > 3) {
             let qrs = strng.split("$")
             let tuv = parseFloat(qrs[1].replace(",", ""))
             return tuv
-        }else{
+        } else {
             return null
         }
     }
