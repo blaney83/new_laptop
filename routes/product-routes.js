@@ -18,10 +18,10 @@ module.exports = function (app) {
                 //     console.log(config)
                 //     return config;
                 // })
-                axios.interceptors.response.use(function (config) {
-                    console.log("response received")
-                    return config;
-                })
+                // axios.interceptors.response.use(function (config) {
+                //     console.log("response received")
+                //     return config;
+                // })
                 axios({
                     method: "GET",
                     url: "https://www.bestbuy.com/site/laptop-computers/all-laptops/pcmcat138500050001.c?cp=" + i + "&id=pcmcat138500050001",
