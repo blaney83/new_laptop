@@ -1,8 +1,11 @@
 
 $(document).ready(function () {
-    $(document).off("click", ".20MoreTar", AddingProducts);
-    $.ajaxSetup({ cache: false });
+    // $(document).off("click", ".20MoreTar", AddingProducts);
+    console.log("howmany times are you firing?")
+    // $.ajaxSetup({ cache: false });
     $(".dropdown-trigger").dropdown();
+    $('.sidenav').sidenav();
+    // localStorage.setItem("productsDisplayed", 20)
     if (window.location.pathname == "/student/products") {
         localStorage.setItem("sortType", null)
     } else if (window.location.pathname == "/student/products/lowest") {
@@ -12,91 +15,91 @@ $(document).ready(function () {
     } else if (window.location.pathname == "/student/products/best_deals") {
         localStorage.setItem("sortType", "deals")
     }
-    $(document).on("click", "#showProducts", function (event) {
+    $(document).on("click", "#showProducts", showProducts)
+    $(document).on("click", "#lowPriceSort", sortLowPrice)
+    $(document).on("click", "#highestPriceSort", sortHighPrice)
+    $(document).on("click", "#bestDealsSort", sortBestDeals)
+    $(document).on("click", ".saveProduct", saveProduct)
+    $(document).on("click", "#showSaved", showSaved)
+    $(".footButtTar").on("click", clearSaved)
+    $(".20MoreTar").on("click", AddingProducts);
+
+    function showProducts(event) {
         localStorage.clear()
         localStorage.setItem("productsDisplayed", 20)
         localStorage.setItem("sortType", null)
-        window.history.pushState("deals", "Tech Top-Off", "/student/products");
-        let prodNum = localStorage.productsDisplayed
-        let somethingElse = {
-            numberP: prodNum
-        }
+        window.history.pushState("deals", "Tech Top-Off", "/student/products/" + localStorage.productsDisplayed);
+        let id = localStorage.productsDisplayed
         $.ajax({
             method: "GET",
-            url: "/student/products",
-            data: somethingElse,
+            url: "/student/products/" + id,
         }).then(resp => {
-            $("body").html(resp)
+            // $("body").html(resp)
+            location.reload()
             $("footer").css({ position: "relative" })
             $(".cardRow").css({ display: "none" })
         })
-    })
+        // $(document).off("click", "#showProducts", showProducts)
+    }
 
-    $(document).on("click", "#lowPriceSort", function (event) {
+
+    function sortLowPrice(event) {
         $(document).off("click", ".saveProduct", saveProduct)
         localStorage.clear()
         localStorage.setItem("productsDisplayed", 20)
         localStorage.setItem("sortType", "low")
-        window.history.pushState("deals", "Tech Top-Off", "/student/products/lowest");
-        let prodNum = localStorage.productsDisplayed
-        let somethingElse = {
-            numberP: prodNum
-        }
+        window.history.pushState("deals", "Tech Top-Off", "/student/products/lowest/" + localStorage.productsDisplayed);
+        let id = localStorage.productsDisplayed
         $.ajax({
             method: "GET",
-            url: "/student/products/lowest",
-            data: somethingElse,
+            url: "/student/products/lowest/" + id,
         }).then(resp => {
-            $("body").html(resp)
+            // $("body").html(resp)
+            location.reload()
             $("footer").css({ position: "relative" })
             $(".cardRow").css({ display: "none" })
         })
-    })
+        // $(document).off("click", "#lowPriceSort", sortLowPrice)
+    }
 
-    $(document).on("click", "#highestPriceSort", function (event) {
+    function sortHighPrice(event) {
         $(document).off("click", ".saveProduct", saveProduct)
         localStorage.clear()
         localStorage.setItem("productsDisplayed", 20)
         localStorage.setItem("sortType", "high")
-        window.history.pushState("deals", "Tech Top-Off", "/student/products/highest");
-        let prodNum = localStorage.productsDisplayed
-        let somethingElse = {
-            numberP: prodNum
-        }
+        window.history.pushState("deals", "Tech Top-Off", "/student/products/highest/" + localStorage.productsDisplayed);
+        let id = localStorage.productsDisplayed
         $.ajax({
             method: "GET",
-            url: "/student/products/highest",
-            data: somethingElse,
+            url: "/student/products/highest/" + id,
         }).then(resp => {
-            $("body").html(resp)
+            // $("body").html(resp)
+            location.reload()
             $("footer").css({ position: "relative" })
             $(".cardRow").css({ display: "none" })
         })
-    })
+        // $(document).on("click", "#highestPriceSort", sortHighPrice)
+    }
 
-    $(document).on("click", "#bestDealsSort", function (event) {
+    function sortBestDeals(event) {
         $(document).off("click", ".saveProduct", saveProduct)
         localStorage.clear()
         localStorage.setItem("productsDisplayed", 20)
         localStorage.setItem("sortType", "deals")
-        window.history.pushState("deals", "Tech Top-Off", "/student/products/best_deals");
-        let prodNum = localStorage.productsDisplayed
-        let somethingElse = {
-            numberP: prodNum
-        }
+        window.history.pushState("deals", "Tech Top-Off", "/student/products/best_deals/" + localStorage.productsDisplayed);
+        let id = localStorage.productsDisplayed
         $.ajax({
             method: "GET",
-            url: "/student/products/best_deals",
-            data: somethingElse,
+            url: "/student/products/best_deals/" + id,
         }).then(resp => {
-            $("body").html(resp)
+            // $("body").html(resp)
+            location.reload()
             $("footer").css({ position: "relative" })
             $(".cardRow").css({ display: "none" })
         })
-    })
+        // $(document).off("click", "#bestDealsSort", sortBestDeals)
+    }
 
-    $(document).on("click", ".saveProduct", saveProduct)
-    
     function saveProduct(event) {
         let savedItem = event.target.id
         let body = {
@@ -107,24 +110,26 @@ $(document).ready(function () {
             url: "/student/saved",
             data: body
         }).then(resp => {
-            if(resp.nModified >0){
+            if (resp.nModified > 0) {
                 M.toast({ html: 'Item saved', classes: 'rounded' });
             }
         })
     }
 
-    $(document).on("click", "#showSaved", function (event) {
+    function showSaved(event) {
         $(document).off("click", ".saveProduct", saveProduct)
-        window.history.pushState("deals", "Tech Top-Off", "/student/products/saved");
+        window.history.pushState("deals", "Tech Top-Off", "/student/products/saved/");
         $.ajax({
             method: "GET",
             url: "/student/saved",
         }).then(resp => {
             $("body").html(resp)
+            // location.reload()
         })
-    })
+        // $(document).off("click", "#showSaved", showSaved)
+    }
 
-    $(".footButtTar").on("click", function (event) {
+    function clearSaved(event) {
         let savedArray = []
         $("a.saveProduct").each(function (elem, i) {
             savedArray.push($(this).attr("id"))
@@ -140,58 +145,64 @@ $(document).ready(function () {
         }).then(resp => {
             $(".messageTarget").html('<div class="row cardRow"><div class="col s2"></div><div class="col s8"><div class="card-panel orange center-align"><span class="white-text"><h3>Saved Items Cleared</h3><br></span></div></div><div class="col s2"></div></div>')
         })
-    })
+        // $(".footButtTar").on("click", clearSaved)
+    }
 
-    $(".20MoreTar").on("click", AddingProducts);
 
     function AddingProducts(event) {
-        $(document).off("click", ".saveProduct", saveProduct)
+        // $(document).off("click", ".saveProduct", saveProduct)
+        let id = parseInt(localStorage.productsDisplayed) + 20
         localStorage.setItem("productsDisplayed", parseInt(localStorage.productsDisplayed) + 20)
-        var somethingElse = {
-            numberP: parseInt(localStorage.productsDisplayed) + 20
-        }
         if (localStorage.sortType === "null") {
+            window.history.pushState("deals", "Tech Top-Off", "/student/products/" + localStorage.productsDisplayed);
             $.ajax({
                 method: "GET",
-                url: "/student/products",
-                data: somethingElse,
+                url: "/student/products/" + id,
             }).then(resp => {
-                $("body").html(resp)
+                // $("body").html(resp)
+                location.reload()
+
                 $("footer").css({ position: "relative" })
                 $(".cardRow").css({ display: "none" })
             })
-            let newPageLimit = 20
-            document.cookie = "numDisplay=" + newPageLimit
         } else if (localStorage.sortType === "low") {
+            window.history.pushState("deals", "Tech Top-Off", "/student/products/lowest/" + localStorage.productsDisplayed);
             $.ajax({
                 method: "GET",
-                url: "/student/products/lowest",
-                data: somethingElse,
+                url: "/student/products/lowest/" + id,
             }).then(resp => {
-                $("body").html(resp)
+                // $("body").html(resp)
+                location.reload()
+
                 $("footer").css({ position: "relative" })
                 $(".cardRow").css({ display: "none" })
             })
         } else if (localStorage.sortType === "high") {
+            window.history.pushState("deals", "Tech Top-Off", "/student/products/highest/" + localStorage.productsDisplayed);
             $.ajax({
                 method: "GET",
-                url: "/student/products/highest",
-                data: somethingElse,
+                url: "/student/products/highest/" + id,
             }).then(resp => {
-                $("body").html(resp)
+                // $("body").html(resp)
+                location.reload()
+
                 $("footer").css({ position: "relative" })
                 $(".cardRow").css({ display: "none" })
             })
         } else if (localStorage.sortType === "deals") {
+            window.history.pushState("deals", "Tech Top-Off", "/student/products/best_deals/" + localStorage.productsDisplayed);
             $.ajax({
                 method: "GET",
-                url: "/student/products/best_deals",
-                data: somethingElse,
+                url: "/student/products/best_deals/" + id,
             }).then(resp => {
-                $("body").html(resp)
+                // $("body").html(resp)
+                location.reload()
+
                 $("footer").css({ position: "relative" })
                 $(".cardRow").css({ display: "none" })
             })
         }
+        // $(".20MoreTar").off("click", AddingProducts);
+
     }
 })

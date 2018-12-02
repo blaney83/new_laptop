@@ -84,13 +84,14 @@ module.exports = function (app) {
         })
     });
 
-    app.get("/student/products", function (req, res) {
-        if(!parseInt(req.query.numberP)){
+    app.get("/student/products/:id", function (req, res) {
+        if(!parseInt(req.params.id)){
             prodNum = 20
         }else{
-            prodNum = parseInt(req.query.numberP)
+            prodNum = parseInt(req.params.id)
         }
         db.Product.find({}).limit(prodNum).then(function (prodArr) {
+            console.log("fire")
             let myProds = {
                 products: prodArr
             }
@@ -102,11 +103,11 @@ module.exports = function (app) {
             res.render("products")
     })
 
-    app.get("/student/products/lowest", function(req, res){
-        if(!parseInt(req.query.numberP)){
+    app.get("/student/products/lowest/:id", function(req, res){
+        if(!parseInt(req.params.id)){
             prodNum1 = 20
         }else{
-            prodNum1 = parseInt(req.query.numberP)
+            prodNum1 = parseInt(req.param.id)
         }
         db.Product.find({}).sort({lowestPrice:1}).limit(prodNum1).then(function (prodArr){
             let myProds = {
@@ -116,11 +117,11 @@ module.exports = function (app) {
         })
     })
 
-    app.get("/student/products/highest", function(req, res){
-        if(!parseInt(req.query.numberP)){
+    app.get("/student/products/highest/:id", function(req, res){
+        if(!parseInt(req.params.id)){
             prodNum2 = 20
         }else{
-            prodNum2 = parseInt(req.query.numberP)
+            prodNum2 = parseInt(req.params.id)
         }
         db.Product.find({}).sort({lowestPrice:-1}).limit(prodNum2).then(function (prodArr){
             let myProds = {
@@ -130,11 +131,11 @@ module.exports = function (app) {
         })
     })
 
-    app.get("/student/products/best_deals", function(req, res){
-        if(!parseInt(req.query.numberP)){
+    app.get("/student/products/best_deals/:id", function(req, res){
+        if(!parseInt(req.params.id)){
             prodNum3 = 20
         }else{
-            prodNum3 = parseInt(req.query.numberP)
+            prodNum3 = parseInt(req.params.id)
         }
         db.Product.find({}).sort({savingsPercent:-1}).limit(prodNum3).then(function (prodArr){
             let myProds = {

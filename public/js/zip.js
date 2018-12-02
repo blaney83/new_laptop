@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-
+    $('.sidenav').sidenav();
     $("#submitZip").on("click", function (events) {
         let fullZip = []
         let coordinates = "";

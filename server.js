@@ -22,8 +22,6 @@ app.use(express.json());
 app.use(express.static("public"));
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/goodDealsDB";
-console.log(MONGODB_URI)
-console.log(process.env.MONGODB_URI, { useNewUrlParser: true })
 mongoose.connect(MONGODB_URI)
 
 require("./routes/zip-routes.js")(app);
