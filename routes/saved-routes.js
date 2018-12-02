@@ -17,7 +17,7 @@ module.exports = function (app) {
             let myProds = {
                 products: prodArr
             }
-            res.render("products", myProds)
+            res.render("saved", myProds)
         })
     })
 

@@ -7,22 +7,12 @@ let db = require("../models");
 
 module.exports = function (app) {
 
-    app.get("/student", function (req, res) {
+    app.get("/zip", function (req, res) {
         db.Product.remove({}, function (resp) {
-
-            console.log("its firing")
-            // let zip = req.query.zipCode;
-            // let coords = req.query.coords;
-            // axios.interceptors.request.use(request => {
-            //     // console.log(request)
-            //     // console.log(request.transformRequest)
-            //     // console.log(request.validateStatus)
-            //     return request
-            // })
             let hbsobj = {
                 products: []
             }
-            for (let i = 1; i < 2; i++) {
+            for (let i = 1; i < 10; i++) {
                 axios({
                     method: "GET",
                     url: "hhttps://www.bestbuy.com/site/laptop-computers/all-laptops/pcmcat138500050001.c?cp=" + i + "&id=pcmcat138500050001",
@@ -80,8 +70,6 @@ module.exports = function (app) {
                                 result.savingsPercent = 0
                             }
                             if (result.link != undefined) {
-                                // console.log(result)
-                                // objHolder.push(result)
                                 db.Product.create(result).then(function (result) {
                                     console.log("wrote to db")
                                     hbsobj.products.push(result)
@@ -101,18 +89,12 @@ module.exports = function (app) {
         })
     });
 
-    // app.get("/api/products", function(req, res){
-    //     db.Product.find({}).then(function(prodArr){
-    //         console.log(prodArr)
-    //         let myProds = {
-    //             products: prodArr
-    //         }
-    //         res.render("products", myProds)
-    //     })
-    // })
     app.get("/student/products", function (req, res) {
-        db.Product.find({}).then(function (prodArr) {
-            console.log(prodArr)
+        let prodNum = parseInt(req.query.numberP)
+        // let prodNum = parseInt(req.headers.cookie.substring(11))
+        console.log(prodNum)
+        db.Product.find({}).limit(prodNum).then(function (prodArr) {
+            // console.log(prodArr)
             let myProds = {
                 products: prodArr
             }
@@ -120,9 +102,16 @@ module.exports = function (app) {
         })
     })
 
+    app.get("/student", function (req, res) {
+            res.render("products")
+    })
+
     app.get("/student/products/lowest", function(req, res){
-        db.Product.find({}).sort({lowestPrice:1}).then(function (prodArr){
-            console.log(prodArr)
+        let prodNum = parseInt(req.query.numberP)
+        // let prodNum = parseInt(req.headers.cookie.substring(11))
+        console.log(prodNum)
+        db.Product.find({}).sort({lowestPrice:1}).limit(prodNum).then(function (prodArr){
+            // console.log(prodArr)
             let myProds = {
                 products: prodArr
             }
@@ -131,8 +120,11 @@ module.exports = function (app) {
     })
 
     app.get("/student/products/highest", function(req, res){
-        db.Product.find({}).sort({lowestPrice:-1}).then(function (prodArr){
-            console.log(prodArr)
+        let prodNum = parseInt(req.query.numberP)
+        // let prodNum = parseInt(req.headers.cookie.substring(11))
+        console.log(prodNum)
+        db.Product.find({}).sort({lowestPrice:-1}).limit(prodNum).then(function (prodArr){
+            // console.log(prodArr)
             let myProds = {
                 products: prodArr
             }
@@ -141,8 +133,11 @@ module.exports = function (app) {
     })
 
     app.get("/student/products/best_deals", function(req, res){
-        db.Product.find({}).sort({savingsPercent:-1}).then(function (prodArr){
-            console.log(prodArr)
+        let prodNum = parseInt(req.query.numberP)
+        // let prodNum = parseInt(req.headers.cookie.substring(11))
+        console.log(prodNum)
+        db.Product.find({}).sort({savingsPercent:-1}).limit(prodNum).then(function (prodArr){
+            // console.log(prodArr)
             let myProds = {
                 products: prodArr
             }
