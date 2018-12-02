@@ -13,6 +13,7 @@ module.exports = function (app) {
                 products: []
             }
             for (let i = 1; i < 40; i++) {
+                console.log("loop working " + i)
                 axios({
                     method: "GET",
                     url: "https://www.bestbuy.com/site/laptop-computers/all-laptops/pcmcat138500050001.c?cp=" + i + "&id=pcmcat138500050001",
