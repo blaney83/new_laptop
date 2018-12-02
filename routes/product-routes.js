@@ -7,7 +7,8 @@ module.exports = function (app) {
 
     app.get("/zip", function (req, res) {
         console.log("writing")
-        db.Product.remove({}, function (resp) {
+        db.Product.deleteMany({}).then(function (resp) {
+            console.log("collection dropped!")
             let hbsobj = {
                 products: []
             }
