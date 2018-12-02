@@ -19,7 +19,7 @@ module.exports = function (app) {
                 //     return config;
                 // })
                 axios.interceptors.response.use(function (config) {
-                    console.log(config)
+                    console.log("response received")
                     return config;
                 })
                 axios({
