@@ -24,8 +24,6 @@ app.use(express.static("public"));
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/goodDealsDB";
 
 mongoose.connect(MONGODB_URI)
-// Connect to the Mongo DB
-// mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
 
 require("./routes/zip-routes.js")(app);
 require("./routes/product-routes.js")(app);
