@@ -1,12 +1,8 @@
 {
-  "name": "y",
-  "version": "y",
-  "description": "y",
-  "main": "y",
-  "repository": "y",
-  "author": "y",
-  "license": "y",
-  "private": true,
+  "name": "new_laptop",
+  "version": "1.0.0",
+  "description": "A noSQL bargain consolidator running Express Servers, Mongoose, and Node",
+  "main": "server.js",
   "dependencies": {
     "axios": "^0.18.0",
     "casperjs": "^1.1.4",
@@ -16,5 +12,21 @@
     "mongoose": "^5.3.14",
     "morgan": "^1.9.1",
     "phantomjs": "^2.1.7"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blaney83/new_laptop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blaney83/new_laptop/issues"
+  },
+  "homepage": "https://github.com/blaney83/new_laptop#readme"
 }
