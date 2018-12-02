@@ -1,6 +1,4 @@
 
-
-// const path = require("path");
 const axios = require("axios")
 const cheerio = require("cheerio")
 let db = require("../models");
@@ -12,7 +10,7 @@ module.exports = function (app) {
             let hbsobj = {
                 products: []
             }
-            for (let i = 1; i < 10; i++) {
+            for (let i = 1; i < 40; i++) {
                 axios({
                     method: "GET",
                     url: "hhttps://www.bestbuy.com/site/laptop-computers/all-laptops/pcmcat138500050001.c?cp=" + i + "&id=pcmcat138500050001",
@@ -21,7 +19,6 @@ module.exports = function (app) {
                     let result = {}
                     $("li.sku-item").each(function (i, element) {
                         if (true) {
-                            console.log("this should fire 25 times")
                             let xyz = $(this).html().split('<div class="" data-track="[context:listRank=24]"><div><div id="shop-sku-list-item-7cb2767f-7b7f-4f36-abcb-22e6fd430af4" data-version="2.12.5">')
                             let abc = xyz[0].split("<script>")
                             let efg = $(this).html().split('<div class="pricing-price">')
@@ -74,14 +71,12 @@ module.exports = function (app) {
                                     console.log("wrote to db")
                                     hbsobj.products.push(result)
                                 }).catch(function (err) {
-                                    console.log(err)
                                     res.send(err)
                                 })
                             }
                         }
                     })
                 }).catch(function (err) {
-                    console.log(err)
                     res.send(err)
                 })
             }
@@ -90,11 +85,12 @@ module.exports = function (app) {
     });
 
     app.get("/student/products", function (req, res) {
-        let prodNum = parseInt(req.query.numberP)
-        // let prodNum = parseInt(req.headers.cookie.substring(11))
-        console.log(prodNum)
+        if(!parseInt(req.query.numberP)){
+            prodNum = 20
+        }else{
+            prodNum = parseInt(req.query.numberP)
+        }
         db.Product.find({}).limit(prodNum).then(function (prodArr) {
-            // console.log(prodArr)
             let myProds = {
                 products: prodArr
             }
@@ -107,11 +103,12 @@ module.exports = function (app) {
     })
 
     app.get("/student/products/lowest", function(req, res){
-        let prodNum = parseInt(req.query.numberP)
-        // let prodNum = parseInt(req.headers.cookie.substring(11))
-        console.log(prodNum)
-        db.Product.find({}).sort({lowestPrice:1}).limit(prodNum).then(function (prodArr){
-            // console.log(prodArr)
+        if(!parseInt(req.query.numberP)){
+            prodNum1 = 20
+        }else{
+            prodNum1 = parseInt(req.query.numberP)
+        }
+        db.Product.find({}).sort({lowestPrice:1}).limit(prodNum1).then(function (prodArr){
             let myProds = {
                 products: prodArr
             }
@@ -120,11 +117,12 @@ module.exports = function (app) {
     })
 
     app.get("/student/products/highest", function(req, res){
-        let prodNum = parseInt(req.query.numberP)
-        // let prodNum = parseInt(req.headers.cookie.substring(11))
-        console.log(prodNum)
-        db.Product.find({}).sort({lowestPrice:-1}).limit(prodNum).then(function (prodArr){
-            // console.log(prodArr)
+        if(!parseInt(req.query.numberP)){
+            prodNum2 = 20
+        }else{
+            prodNum2 = parseInt(req.query.numberP)
+        }
+        db.Product.find({}).sort({lowestPrice:-1}).limit(prodNum2).then(function (prodArr){
             let myProds = {
                 products: prodArr
             }
@@ -133,11 +131,12 @@ module.exports = function (app) {
     })
 
     app.get("/student/products/best_deals", function(req, res){
-        let prodNum = parseInt(req.query.numberP)
-        // let prodNum = parseInt(req.headers.cookie.substring(11))
-        console.log(prodNum)
-        db.Product.find({}).sort({savingsPercent:-1}).limit(prodNum).then(function (prodArr){
-            // console.log(prodArr)
+        if(!parseInt(req.query.numberP)){
+            prodNum3 = 20
+        }else{
+            prodNum3 = parseInt(req.query.numberP)
+        }
+        db.Product.find({}).sort({savingsPercent:-1}).limit(prodNum3).then(function (prodArr){
             let myProds = {
                 products: prodArr
             }

@@ -7,7 +7,7 @@ module.exports = function (app) {
     app.post("/student/saved", function(req, res){
         let searcher = req.body.sku + " "
         db.Product.update({"sku":searcher},{$set: {"saved":true}}).then(function(retVal){
-            res.send("Saved 1 Item")
+            res.send(retVal)
         })
     })
 
