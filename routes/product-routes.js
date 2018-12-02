@@ -6,6 +6,7 @@ let db = require("../models");
 module.exports = function (app) {
 
     app.get("/zip", function (req, res) {
+        console.log("writing")
         db.Product.remove({}, function (resp) {
             let hbsobj = {
                 products: []
@@ -13,7 +14,7 @@ module.exports = function (app) {
             for (let i = 1; i < 40; i++) {
                 axios({
                     method: "GET",
-                    url: "hhttps://www.bestbuy.com/site/laptop-computers/all-laptops/pcmcat138500050001.c?cp=" + i + "&id=pcmcat138500050001",
+                    url: "https://www.bestbuy.com/site/laptop-computers/all-laptops/pcmcat138500050001.c?cp=" + i + "&id=pcmcat138500050001",
                 }).then(function (resp) {
                     let $ = cheerio.load(resp.data)
                     let result = {}
