@@ -17,6 +17,7 @@ module.exports = function (app) {
                     method: "GET",
                     url: "https://www.bestbuy.com/site/laptop-computers/all-laptops/pcmcat138500050001.c?cp=" + i + "&id=pcmcat138500050001",
                 }).then(function (resp) {
+                    console.log(resp)
                     let $ = cheerio.load(resp.data)
                     let result = {}
                     $("li.sku-item").each(function (i, element) {

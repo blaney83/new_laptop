@@ -64,7 +64,7 @@ let productSchema = new Schema({
     }
 });
 
-let Product = mongoose.model("Product", productSchema);
+let Product = mongoose.model("product", productSchema);
 
 module.exports = Product;
 
