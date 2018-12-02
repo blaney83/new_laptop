@@ -21,7 +21,7 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/goodDealsDB";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/gooddealsdb";
 mongoose.connect(MONGODB_URI)
 
 require("./routes/zip-routes.js")(app);
