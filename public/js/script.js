@@ -1,11 +1,8 @@
 
 $(document).ready(function () {
-    // $(document).off("click", ".20MoreTar", AddingProducts);
     console.log("howmany times are you firing?")
-    // $.ajaxSetup({ cache: false });
     $(".dropdown-trigger").dropdown();
     $('.sidenav').sidenav();
-    // localStorage.setItem("productsDisplayed", 20)
     if (window.location.pathname == "/student/products") {
         localStorage.setItem("sortType", null)
     } else if (window.location.pathname == "/student/products/lowest") {
@@ -34,12 +31,10 @@ $(document).ready(function () {
             method: "GET",
             url: "/student/products/" + id,
         }).then(resp => {
-            // $("body").html(resp)
             location.reload()
             $("footer").css({ position: "relative" })
             $(".cardRow").css({ display: "none" })
         })
-        // $(document).off("click", "#showProducts", showProducts)
     }
 
 
@@ -54,12 +49,10 @@ $(document).ready(function () {
             method: "GET",
             url: "/student/products/lowest/" + id,
         }).then(resp => {
-            // $("body").html(resp)
             location.reload()
             $("footer").css({ position: "relative" })
             $(".cardRow").css({ display: "none" })
         })
-        // $(document).off("click", "#lowPriceSort", sortLowPrice)
     }
 
     function sortHighPrice(event) {
@@ -73,12 +66,10 @@ $(document).ready(function () {
             method: "GET",
             url: "/student/products/highest/" + id,
         }).then(resp => {
-            // $("body").html(resp)
             location.reload()
             $("footer").css({ position: "relative" })
             $(".cardRow").css({ display: "none" })
         })
-        // $(document).on("click", "#highestPriceSort", sortHighPrice)
     }
 
     function sortBestDeals(event) {
@@ -92,12 +83,10 @@ $(document).ready(function () {
             method: "GET",
             url: "/student/products/best_deals/" + id,
         }).then(resp => {
-            // $("body").html(resp)
             location.reload()
             $("footer").css({ position: "relative" })
             $(".cardRow").css({ display: "none" })
         })
-        // $(document).off("click", "#bestDealsSort", sortBestDeals)
     }
 
     function saveProduct(event) {
@@ -124,9 +113,7 @@ $(document).ready(function () {
             url: "/student/saved",
         }).then(resp => {
             $("body").html(resp)
-            // location.reload()
         })
-        // $(document).off("click", "#showSaved", showSaved)
     }
 
     function clearSaved(event) {
@@ -145,12 +132,10 @@ $(document).ready(function () {
         }).then(resp => {
             $(".messageTarget").html('<div class="row cardRow"><div class="col s2"></div><div class="col s8"><div class="card-panel orange center-align"><span class="white-text"><h3>Saved Items Cleared</h3><br></span></div></div><div class="col s2"></div></div>')
         })
-        // $(".footButtTar").on("click", clearSaved)
     }
 
 
     function AddingProducts(event) {
-        // $(document).off("click", ".saveProduct", saveProduct)
         let id = parseInt(localStorage.productsDisplayed) + 20
         localStorage.setItem("productsDisplayed", parseInt(localStorage.productsDisplayed) + 20)
         if (localStorage.sortType === "null") {
@@ -159,7 +144,6 @@ $(document).ready(function () {
                 method: "GET",
                 url: "/student/products/" + id,
             }).then(resp => {
-                // $("body").html(resp)
                 location.reload()
 
                 $("footer").css({ position: "relative" })
@@ -171,7 +155,6 @@ $(document).ready(function () {
                 method: "GET",
                 url: "/student/products/lowest/" + id,
             }).then(resp => {
-                // $("body").html(resp)
                 location.reload()
 
                 $("footer").css({ position: "relative" })
@@ -183,7 +166,6 @@ $(document).ready(function () {
                 method: "GET",
                 url: "/student/products/highest/" + id,
             }).then(resp => {
-                // $("body").html(resp)
                 location.reload()
 
                 $("footer").css({ position: "relative" })
@@ -195,14 +177,11 @@ $(document).ready(function () {
                 method: "GET",
                 url: "/student/products/best_deals/" + id,
             }).then(resp => {
-                // $("body").html(resp)
                 location.reload()
 
                 $("footer").css({ position: "relative" })
                 $(".cardRow").css({ display: "none" })
             })
         }
-        // $(".20MoreTar").off("click", AddingProducts);
-
     }
 })
