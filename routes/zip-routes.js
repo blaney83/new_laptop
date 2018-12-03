@@ -16,7 +16,7 @@ module.exports = function(app){
             let hbsobj = {
                 products: []
             }
-            for (let i = 1; i < 40; i++) {
+            for (let i = 1; i < 2; i++) {
                 console.log("loop working " + i)
                 // axios.interceptors.request.use(function (config) {
                 //     console.log(config)
