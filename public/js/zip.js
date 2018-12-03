@@ -1,13 +1,13 @@
 
 $(document).ready(function () {
-    $.ajax({
-        method:"GET",
-        url: "/zip",
-    }).then(function (resp) {
-        console.log("db response received")
-    }).catch(function (err) {
-        alert("Sorry, looks like we could not process that request.")
-    });
+    // $.ajax({
+    //     method:"GET",
+    //     url: "/zip",
+    // }).then(function (resp) {
+    //     console.log("db response received")
+    // }).catch(function (err) {
+    //     alert("Sorry, looks like we could not process that request.")
+    // });
     $('.sidenav').sidenav();
     $("#submitZip").on("click", function (events) {
         let fullZip = []
@@ -22,7 +22,7 @@ $(document).ready(function () {
 
         $.ajax({
             method:"GET",
-            url: "/student",
+            url: "/zip",
         }).then(function (resp) {
             window.history.pushState("deals", "Tech Top-Off", "/student/");
             location.reload("/student");
