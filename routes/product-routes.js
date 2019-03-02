@@ -13,7 +13,7 @@ module.exports = function (app) {
             let hbsobj = {
                 products: []
             }
-            for (let i = 1; i < 40; i++) {
+            for (let i = 1; i < 12; i++) {
                 console.log("loop working " + i)
                 // axios.interceptors.request.use(function (config) {
                 //     console.log(config)
@@ -25,7 +25,12 @@ module.exports = function (app) {
                 // })
                 axios({
                     method: "GET",
-                    url: "https://www.bestbuy.com/site/laptop-computers/all-laptops/pcmcat138500050001.c?cp=" + i + "&id=pcmcat138500050001",
+                    //tvs url set i < 12
+                    url: "https://www.bestbuy.com/site/searchpage.jsp?_dyncharset=UTF-8&cp=" + i + "&id=pcat17071&iht=y&keys=keys&ks=960&list=n&qp=category_facet%3DAll%20Flat-Screen%20TVs~abcat0101001&sc=Global&st=tv&type=page&usc=All%20Categories"
+                    //monitors url, set i < 17
+                    // url: "https://www.bestbuy.com/site/searchpage.jsp?cp=" + i + "&id=pcat17071&qp=category_facet%3Dpcmcat143700050048&st=monitors%20for%20computers",
+                    //laptop url, set i < 40
+                    // url: "https://www.bestbuy.com/site/laptop-computers/all-laptops/pcmcat138500050001.c?cp=" + i + "&id=pcmcat138500050001",
                 }).then(function (resp) {
                     // console.log(resp)
                     console.log("response received")
@@ -125,7 +130,7 @@ module.exports = function (app) {
         if (!parseInt(req.params.id)) {
             prodNum1 = 20
         } else {
-            prodNum1 = parseInt(req.param.id)
+            prodNum1 = parseInt(req.params.id)
         }
         db.Product.find({}).sort({ lowestPrice: 1 }).limit(prodNum1).then(function (prodArr) {
             let myProds = {
